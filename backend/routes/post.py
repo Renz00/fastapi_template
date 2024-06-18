@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, status
 from backend.schema import PostBase
 
-from ..db import db_dependency
+from ..dependencies import db_dependency
 from ..models import Post
 
 router = APIRouter(

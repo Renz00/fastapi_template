@@ -1,11 +1,8 @@
 import os
-from fastapi import Depends
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, Session
+from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from dotenv import load_dotenv
-
-from typing import Annotated
 
 load_dotenv()
 
@@ -23,8 +20,5 @@ def get_db():
     finally:
         db.close()
         
-        
-# setting up dependency injection
-db_dependency = Annotated[Session, Depends(get_db)]
         
         
