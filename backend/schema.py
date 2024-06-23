@@ -9,3 +9,7 @@ class PostBase(BaseModel):
 
 class UserBase(BaseModel):
     username: str
+    
+
+class GenericBase(BaseModel):
+    success: bool

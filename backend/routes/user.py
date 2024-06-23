@@ -1,5 +1,7 @@
 from fastapi import APIRouter, HTTPException, status
-from backend.schema import UserBase
+from backend.schema import GenericBase, UserBase
+
+from typing import Dict
 
 from ..dependencies import db_dependency
 from ..models import User
@@ -12,16 +14,17 @@ router = APIRouter(
 
 
 # user routes
-@router.post('/store/', status_code=status.HTTP_201_CREATED)
+@router.post('/store/', status_code=status.HTTP_201_CREATED, response_model=GenericBase)
 async def store_user(user: UserBase, db: db_dependency):
     # serialize user model into dict using pydantic basemodel
     new_user = User(**user.model_dump())
+    
     db.add(new_user)
     db.commit()
     return {'success': True}
     
 
-@router.get('/show/{user_id}', status_code=status.HTTP_200_OK)
+@router.get('/show/{user_id}', status_code=status.HTTP_200_OK, response_model=Dict[str, bool | UserBase])
 async def show_user(user_id: int, db: db_dependency):
     user = db.query(User).filter(User.id == user_id).first()
     if user is None:
