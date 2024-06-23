@@ -10,7 +10,7 @@ engine = create_engine(f"{os.getenv('DB_TYPE')}+pymysql://{os.getenv('DB_USER')}
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
-# creating db dependency
+# creating db dependency for query handling in routes
 def get_db():
     db = SessionLocal()
     try:
