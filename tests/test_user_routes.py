@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.testclient import TestClient
 
 from main import app # use the app instance inside main.py
-from backend.routes.user import router 
+from backend.routes.user import router # use the router instance to get url paths dynamically
 
 client = TestClient(app)
 
